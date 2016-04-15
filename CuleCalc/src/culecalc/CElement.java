@@ -36,6 +36,6 @@ public class CElement{
                 "Electrons: " + this.electrons + "\n" +
                 "Neutrons: " + this.neutrons + "\n" +
                 "Mass: " + this.mass + "\n" +
-                "Valence: " + this.valence + "\n";
+                "Valence: " + this.valence;
     }
 }

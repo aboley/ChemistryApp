@@ -31,13 +31,12 @@ public class XMLReader {
                Element e = (Element) cur;
                String name = e.getElementsByTagName("name").item(0).getTextContent();
                String symbol = e.getElementsByTagName("symbol").item(0).getTextContent();
-               int protons = Integer.parseInt(e.getElementsByTagName("protons").item(0).getTextContent());
-               int electrons = Integer.parseInt(e.getElementsByTagName("electrons").item(0).getTextContent());
-               int neutrons = Integer.parseInt(e.getElementsByTagName("neutrons").item(0).getTextContent());
+               int protons = Integer.parseInt(e.getAttribute("number"));
                double mass = Double.parseDouble(e.getElementsByTagName("mass").item(0).getTextContent());
+               int neutrons = (int)(Math.round(mass)) - protons;
                int valence = Integer.parseInt(e.getElementsByTagName("valence").item(0).getTextContent());
                
-               elements.add(new CElement(name,symbol,protons,electrons,neutrons,mass,valence));
+               elements.add(new CElement(name,symbol,protons,protons,neutrons,mass,valence));
             }
          }
       } catch (Exception ex) {
@@ -45,5 +44,8 @@ public class XMLReader {
       }
    }
    
-   public ArrayList<CElement> getElements(){ return this.elements; }
+   public ArrayList<CElement> getElements(){ 
+       elements.add(0,new CElement("Unubtanium","Uub",0,0,0,0.0,0)); 
+       return this.elements;
+   }
 }

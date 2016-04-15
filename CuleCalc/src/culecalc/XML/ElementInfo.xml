@@ -1,88 +1,728 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE elements [
-  <!ELEMENT element (name,symbol,protons,electrons,neutrons,mass,valence)>
+  <!ELEMENT element (name,symbol,neutrons,mass,valence)>
   <!ATTLIST element number CDATA #REQUIRED>
   <!ELEMENT name (#PCDATA)>
   <!ELEMENT symbol (#PCDATA)>
-  <!ELEMENT protons (#PCDATA)>
-  <!ELEMENT electrons (#PCDATA)>
   <!ELEMENT neutrons (#PCDATA)>
   <!ELEMENT mass (#PCDATA)>
   <!ELEMENT valence (#PCDATA)>
 ]>
 <elements>
-    <element number="1">
-        <name>Hydrogen</name>
-        <symbol>H</symbol>
-        <protons>1</protons>
-        <electrons>1</electrons>
-        <neutrons>0</neutrons>
-        <mass>1.008</mass>
-        <valence>1</valence>
-    </element>
-    <element number="2">
-        <name>Helium</name>
-        <symbol>He</symbol>
-        <protons>2</protons>
-        <electrons>2</electrons>
-        <neutrons>2</neutrons>
-        <mass>4.003</mass>
-        <valence>2</valence>
-    </element>
-    <element number="3">
-        <name>Lithium</name>
-        <symbol>Li</symbol>
-        <protons>3</protons>
-        <electrons>3</electrons>
-        <neutrons>3</neutrons>
-        <mass>6.941</mass>
-        <valence>1</valence>
-    </element>
-    <element number="4">
-        <name>Beryllium</name>
-        <symbol>Be</symbol>
-        <protons>4</protons>
-        <electrons>4</electrons>
-        <neutrons>5</neutrons>
-        <mass>9.021</mass>
-        <valence>2</valence>
-    </element>
-    <element number="5">
-        <name>Boron</name>
-        <symbol>B</symbol>
-        <protons>5</protons>
-        <electrons>5</electrons>
-        <neutrons>5</neutrons>
-        <mass>10.811</mass>
-        <valence>3</valence>
-    </element>
-    <element number="6">
-        <name>Carbon</name>
-        <symbol>C</symbol>
-        <protons>6</protons>
-        <electrons>6</electrons>
-        <neutrons>6</neutrons>
-        <mass>12.01</mass>
-        <valence>4</valence>
-    </element>
-    <element number="7">
-        <name>Nitrogen</name>
-        <symbol>N</symbol>
-        <protons>7</protons>
-        <electrons>7</electrons>
-        <neutrons>7</neutrons>
-        <mass>14.007</mass>
-        <valence>5</valence>
-    </element>
-    <!--
-    <element number="">
-        <name></name>
-        <symbol></symbol>
-        <protons></protons>
-        <electrons></electrons>
-        <neutrons></neutrons>
-        <mass></mass>
-        <valence></valence>
-    </element>
-    -->
+	<element number="1">
+		<name>Hydrogen</name>
+		<symbol>H</symbol>
+		<mass>1.008</mass>
+		<valence>1</valence>
+	</element>
+	<element number="2">
+		<name>Helium</name>
+		<symbol>He</symbol>
+		<mass>4.003</mass>
+		<valence>2</valence>
+	</element>
+	<element number="3">
+		<name>Lithium</name>
+		<symbol>Li</symbol>
+		<mass>6.941</mass>
+		<valence>1</valence>
+	</element>
+	<element number="4">
+		<name>Beryllium</name>
+		<symbol>Be</symbol>
+		<mass>9.021</mass>
+		<valence>2</valence>
+	</element>
+	<element number="5">
+		<name>Boron</name>
+		<symbol>B</symbol>
+		<mass>10.811</mass>
+		<valence>3</valence>
+	</element>
+	<element number="6">
+		<name>Carbon</name>
+		<symbol>C</symbol>
+		<mass>12.01</mass>
+		<valence>4</valence>
+	</element>
+	<element number="7">
+		<name>Nitrogen</name>
+		<symbol>N</symbol>
+		<mass>14.007</mass>
+		<valence>5</valence>
+	</element>
+	<element number="8">
+		<name>Oxygen</name>
+		<symbol>O</symbol>
+		<mass>15.99</mass>
+		<valence>6</valence>
+	</element>
+	<element number="9">
+		<name>Fluorine</name>
+		<symbol>F</symbol>
+		<mass>18.998</mass>
+		<valence>7</valence>
+	</element>
+	<element number="10">
+		<name>Neon</name>
+		<symbol>Ne</symbol>
+		<mass>20.180</mass>
+		<valence>8</valence>
+	</element>
+	<element number="11">
+		<name>Sodium</name>
+		<symbol>Na</symbol>
+		<mass>22.990</mass>
+		<valence>1</valence>
+	</element>
+	<element number="12">
+		<name>Magnesium</name>
+		<symbol>Mg</symbol>
+		<mass>24.305</mass>
+		<valence>2</valence>
+	</element>
+	<element number="13">
+		<name>Aluminium</name>
+		<symbol>Al</symbol>
+		<mass>26.982</mass>
+		<valence>3</valence>
+	</element>
+	<element number="14">
+		<name>Silicon</name>
+		<symbol>Si</symbol>
+		<mass>28.086</mass>
+		<valence>4</valence>
+	</element>
+	<element number="15">
+		<name>Phosphorous</name>
+		<symbol>P</symbol>
+		<mass>30.974</mass>
+		<valence>5</valence>
+	</element>
+	<element number="16">
+		<name>Sulfur</name>
+		<symbol>S</symbol>
+		<mass>32.066</mass>
+		<valence>6</valence>
+	</element>
+	<element number="17">
+		<name>Chlorine</name>
+		<symbol>Cl</symbol>
+		<mass>35.453</mass>
+		<valence>7</valence>
+	</element>
+	<element number="18">
+		<name>Argon</name>
+		<symbol>Ar</symbol>
+		<mass>39.948</mass>
+		<valence>8</valence>
+	</element>
+	<element number="19">
+		<name>Potassium</name>
+		<symbol>K</symbol>
+		<mass>39.098</mass>
+		<valence>1</valence>
+	</element>
+	<element number="20">
+		<name>Calcium</name>
+		<symbol>Ca</symbol>
+		<mass>40.078</mass>
+		<valence>2</valence>
+	</element>
+	<element number="21">
+		<name>Scandium</name>
+		<symbol>Sc</symbol>
+		<mass>24.956</mass>
+		<valence>3</valence>
+	</element>
+	<element number="22">
+		<name>Titanium</name>
+		<symbol>Ti</symbol>
+		<mass>47.88</mass>
+		<valence>4</valence>
+	</element>
+	<element number="23">
+		<name>Vanadium</name>
+		<symbol>V</symbol>
+		<mass>50.942</mass>
+		<valence>5</valence>
+	</element>
+	<element number="24">
+		<name>Chromium</name>
+		<symbol>Cr</symbol>
+		<mass>51.996</mass>
+		<valence>6</valence>
+	</element>
+	<element number="25">
+		<name>Manganese</name>
+		<symbol>Mn</symbol>
+		<mass>54.938</mass>
+		<valence>7</valence>
+	</element>
+	<element number="26">
+		<name>Iron</name>
+		<symbol>Fe</symbol>
+		<mass>55.933</mass>
+		<valence>8</valence>
+	</element>
+	<element number="27">
+		<name>Cobalt</name>
+		<symbol>Co</symbol>
+		<mass>58.933</mass>
+		<valence>9</valence>
+	</element>
+	<element number="28">
+		<name>Nickel</name>
+		<symbol>Ni</symbol>
+		<mass>58.693</mass>
+		<valence>10</valence>
+	</element>
+	<element number="29">
+		<name>Copper</name>
+		<symbol>Cu</symbol>
+		<mass>63.546</mass>
+		<valence>1</valence>
+	</element>
+	<element number="30">
+		<name>Zinc</name>
+		<symbol>Zn</symbol>
+		<mass>65.39</mass>
+		<valence>2</valence>
+	</element>
+	<element number="31">
+		<name>Gallium</name>
+		<symbol>Ga</symbol>
+		<mass>69.732</mass>
+		<valence>3</valence>
+	</element>
+	<element number="32">
+		<name>Germanium</name>
+		<symbol>Ge</symbol>
+		<mass>72.61</mass>
+		<valence>4</valence>
+	</element>
+	<element number="33">
+		<name>Arsenic</name>
+		<symbol>As</symbol>
+		<mass>74.922</mass>
+		<valence>5</valence>
+	</element>
+	<element number="34">
+		<name>Selenium</name>
+		<symbol>Se</symbol>
+		<mass>78.972</mass>
+		<valence>6</valence>
+	</element>
+	<element number="35">
+		<name>Bromine</name>
+		<symbol>Br</symbol>
+		<mass>79.904</mass>
+		<valence>7</valence>
+	</element>
+	<element number="36">
+		<name>Krypton</name>
+		<symbol>Kr</symbol>
+		<mass>84.80</mass>
+		<valence>8</valence>
+	</element>
+	<element number="37">
+		<name>Rubidium</name>
+		<symbol>Rb</symbol>
+		<mass>84.486</mass>
+		<valence>1</valence>
+	</element>
+	<element number="38">
+		<name>Strontium</name>
+		<symbol>Sr</symbol>
+		<mass>87.62</mass>
+		<valence>2</valence>
+	</element>
+	<element number="39">
+		<name>Yttrium</name>
+		<symbol>Y</symbol>
+		<mass>88.906</mass>
+		<valence>3</valence>
+	</element>
+	<element number="40">
+		<name>Zirconium</name>
+		<symbol>Zr</symbol>
+		<mass>91.224</mass>
+		<valence>4</valence>
+	</element>
+	<element number="41">
+		<name>Niobium</name>
+		<symbol>Nb</symbol>
+		<mass>92.906</mass>
+		<valence>5</valence>
+	</element>
+	<element number="42">
+		<name>Molybdenum</name>
+		<symbol>Mo</symbol>
+		<mass>95.95</mass>
+		<valence>6</valence>
+	</element>
+	<element number="43">
+		<name>Technetium</name>
+		<symbol>Tc</symbol>
+		<mass>98.907</mass>
+		<valence>7</valence>
+	</element>
+	<element number="44">
+		<name>Ruthenium</name>
+		<symbol>Ru</symbol>
+		<mass>101.07</mass>
+		<valence>8</valence>
+	</element>
+	<element number="45">
+		<name>Rhodium</name>
+		<symbol>Rh</symbol>
+		<mass>102.906</mass>
+		<valence>9</valence>
+	</element>
+	<element number="46">
+		<name>Palladium</name>
+		<symbol>Pd</symbol>
+		<mass>106.42</mass>
+		<valence>10</valence>
+	</element>
+	<element number="47">
+		<name>Silver</name>
+		<symbol>Ag</symbol>
+		<mass>107.868</mass>
+		<valence>1</valence>
+	</element>
+	<element number="48">
+		<name>Cadmium</name>
+		<symbol>Cd</symbol>
+		<mass>112.411</mass>
+		<valence>2</valence>
+	</element>
+	<element number="49">
+		<name>Indium</name>
+		<symbol>In</symbol>
+		<mass>114.818</mass>
+		<valence>3</valence>
+	</element>
+	<element number="50">
+		<name>Tin</name>
+		<symbol>Sn</symbol>
+		<mass>118.71</mass>
+		<valence>4</valence>
+	</element>
+	<element number="51">
+		<name>Antimony</name>
+		<symbol>Sb</symbol>
+		<mass>121.760</mass>
+		<valence>5</valence>
+	</element>
+	<element number="52">
+		<name>Tellurium</name>
+		<symbol>Te</symbol>
+		<mass>127.6</mass>
+		<valence>6</valence>
+	</element>
+	<element number="53">
+		<name>Iodine</name>
+		<symbol>I</symbol>
+		<mass>126.904</mass>
+		<valence>7</valence>
+	</element>
+	<element number="54">
+		<name>Xenon</name>
+		<symbol>Xe</symbol>
+		<mass>131.29</mass>
+		<valence>8</valence>
+	</element>
+	<element number="55">
+		<name>Cesium</name>
+		<symbol>Cs</symbol>
+		<mass>132.905</mass>
+		<valence>1</valence>
+	</element>
+	<element number="56">
+		<name>Barium</name>
+		<symbol>Ba</symbol>
+		<mass>137.327</mass>
+		<valence>2</valence>
+	</element>
+	<element number="57">
+		<name>Lanthanum</name>
+		<symbol>La</symbol>
+		<mass>138.906</mass>
+		<valence>3</valence>
+	</element>
+	<element number="58">
+		<name>Cerium</name>
+		<symbol>Ce</symbol>
+		<mass>140.115</mass>
+		<valence>4</valence>
+	</element>
+	<element number="59">
+		<name>Praseodymium</name>
+		<symbol>Pr</symbol>
+		<mass>140.908</mass>
+		<valence>5</valence>
+	</element>
+	<element number="60">
+		<name>Neodymium</name>
+		<symbol>Nd</symbol>
+		<mass>144.913</mass>
+		<valence>6</valence>
+	</element>
+	<element number="61">
+		<name>Promethium</name>
+		<symbol>Pm</symbol>
+		<mass>144.913</mass>
+		<valence>7</valence>
+	</element>
+        <element number="62">
+		<name>Samarium</name>
+		<symbol>Sm</symbol>
+		<mass>150.36</mass>
+		<valence>8</valence>
+	</element>
+        <element number="63">
+		<name>Europium</name>
+		<symbol>Eu</symbol>
+		<mass>151.966</mass>
+		<valence>9</valence>
+	</element>
+        <element number="64">
+		<name>Gadolinium</name>
+		<symbol>Gd</symbol>
+		<mass>157.25</mass>
+		<valence>10</valence>
+	</element>
+        <element number="65">
+		<name>Terbium</name>
+		<symbol>Tb</symbol>
+		<mass>158.925</mass>
+		<valence>11</valence>
+	</element>
+        <element number="66">
+		<name>Dysprosium</name>
+		<symbol>Dy</symbol>
+		<mass>162.50</mass>
+		<valence>12</valence>
+	</element>
+        <element number="67">
+		<name>Holmium</name>
+		<symbol>Ho</symbol>
+		<mass>164.930</mass>
+		<valence>13</valence>
+	</element>
+        <element number="68">
+		<name>Erbium</name>
+		<symbol>Er</symbol>
+		<mass>167.26</mass>
+		<valence>14</valence>
+	</element>
+        <element number="69">
+		<name>Thullium</name>
+		<symbol>Tm</symbol>
+		<mass>168.934</mass>
+		<valence>1</valence>
+	</element>
+        <element number="70">
+		<name>Ytterbium</name>
+		<symbol>Yb</symbol>
+		<mass>173.04</mass>
+		<valence>2</valence>
+	</element>
+        <element number="71">
+		<name>Lutetium</name>
+		<symbol>Lu</symbol>
+		<mass>174.967</mass>
+		<valence>3</valence>
+	</element>
+        <element number="72">
+		<name>Hafnium</name>
+		<symbol>Hf</symbol>
+		<mass>178.49</mass>
+		<valence>4</valence>
+	</element>
+        <element number="73">
+		<name>Tantalum</name>
+		<symbol>Ta</symbol>
+		<mass>180.948</mass>
+		<valence>5</valence>
+	</element>
+        <element number="74">
+		<name>Tungsten</name>
+		<symbol>W</symbol>
+		<mass>183.85</mass>
+		<valence>6</valence>
+	</element>
+        <element number="75">
+		<name>Rhenium</name>
+		<symbol>Re</symbol>
+		<mass>186.207</mass>
+		<valence>7</valence>
+	</element>
+        <element number="76">
+		<name>Osmium</name>
+		<symbol>Os</symbol>
+		<mass>190.23</mass>
+		<valence>8</valence>
+	</element>
+        <element number="77">
+		<name>Iridium</name>
+		<symbol>Ir</symbol>
+		<mass>192.22</mass>
+		<valence>9</valence>
+	</element>
+        <element number="78">
+		<name>Platinum</name>
+		<symbol>Pt</symbol>
+		<mass>195.08</mass>
+		<valence>10</valence>
+	</element>
+        <element number="79">
+		<name>Gold</name>
+		<symbol>Au</symbol>
+		<mass>196.967</mass>
+		<valence>1</valence>
+	</element>
+        <element number="80">
+		<name>Mercury</name>
+		<symbol>Hg</symbol>
+		<mass>200.59</mass>
+		<valence>2</valence>
+	</element>
+        <element number="81">
+		<name>Thallium</name>
+		<symbol>Tl</symbol>
+		<mass>204.383</mass>
+		<valence>3</valence>
+	</element>
+        <element number="82">
+		<name>Lead</name>
+		<symbol>Pb</symbol>
+		<mass>207.2</mass>
+		<valence>4</valence>
+	</element>
+        <element number="83">
+		<name>Bismuth</name>
+		<symbol>Bi</symbol>
+		<mass>208.980</mass>
+		<valence>5</valence>
+	</element>
+        <element number="84">
+		<name>Polonium</name>
+		<symbol>Po</symbol>
+		<mass>208.982</mass>
+		<valence>6</valence>
+	</element>
+        <element number="85">
+		<name>Astatine</name>
+		<symbol>At</symbol>
+		<mass>209.987</mass>
+		<valence>7</valence>
+	</element>
+        <element number="86">
+		<name>Radon</name>
+		<symbol>Rn</symbol>
+		<mass>222.018</mass>
+		<valence>8</valence>
+	</element>
+        <element number="87">
+		<name>Francium</name>
+		<symbol>Fr</symbol>
+		<mass>223.020</mass>
+		<valence>1</valence>
+	</element>
+        <element number="88">
+		<name>Radium</name>
+		<symbol>Ra</symbol>
+		<mass>226.025</mass>
+		<valence>2</valence>
+	</element>
+        <element number="89">
+		<name>Actinium</name>
+		<symbol>Ac</symbol>
+		<mass>227.028</mass>
+		<valence>3</valence>
+	</element>
+        <element number="90">
+		<name>Thorium</name>
+		<symbol>Th</symbol>
+		<mass>232.038</mass>
+		<valence>4</valence>
+	</element>
+        <element number="91">
+		<name>Protactinium</name>
+		<symbol>Pa</symbol>
+		<mass>231.036</mass>
+		<valence>5</valence>
+	</element>
+        <element number="92">
+		<name>Uranium</name>
+		<symbol>U</symbol>
+		<mass>238.029</mass>
+		<valence>6</valence>
+	</element>
+        <element number="93">
+		<name>Neptunium</name>
+		<symbol>Np</symbol>
+		<mass>237.048</mass>
+		<valence>7</valence>
+	</element>
+        <element number="94">
+		<name>Plutonium</name>
+		<symbol>Pu</symbol>
+		<mass>244.064</mass>
+		<valence>8</valence>
+	</element>
+        <element number="95">
+		<name>Americium</name>
+		<symbol>Am</symbol>
+		<mass>243.061</mass>
+		<valence>9</valence>
+	</element>
+        <element number="96">
+		<name>Curium</name>
+		<symbol>Cm</symbol>
+		<mass>247.070</mass>
+		<valence>10</valence>
+	</element>
+        <element number="97">
+		<name>Berkelium</name>
+		<symbol>Bk</symbol>
+		<mass>247.070</mass>
+		<valence>11</valence>
+	</element>
+        <element number="98">
+		<name>Californium</name>
+		<symbol>Cf</symbol>
+		<mass>251.080</mass>
+		<valence>12</valence>
+	</element>
+        <element number="99">
+		<name>Einsteinium</name>
+		<symbol>Es</symbol>
+		<mass>254</mass>
+		<valence>13</valence>
+	</element>
+        <element number="100">
+		<name>Fermium</name>
+		<symbol>Fm</symbol>
+		<mass>257.095</mass>
+		<valence>14</valence>
+	</element>
+        <element number="101">
+		<name>Mendelevium</name>
+		<symbol>Md</symbol>
+		<mass>258.1</mass>
+		<valence>1</valence>
+	</element>
+        <element number="102">
+		<name>Nobelium</name>
+		<symbol>No</symbol>
+		<mass>259.101</mass>
+		<valence>2</valence>
+	</element>
+        <element number="103">
+		<name>Lawrencium</name>
+		<symbol>Lr</symbol>
+		<mass>262</mass>
+		<valence>3</valence>
+	</element>
+        <element number="104">
+		<name>Rutherfordium</name>
+		<symbol>Rf</symbol>
+		<mass>261</mass>
+		<valence>4</valence>
+	</element>
+        <element number="105">
+		<name>Dubnium</name>
+		<symbol>Db</symbol>
+		<mass>262</mass>
+		<valence>5</valence>
+	</element>
+        <element number="106">
+		<name>Seaborgium</name>
+		<symbol>Sg</symbol>
+		<mass>266</mass>
+		<valence>6</valence>
+	</element>
+        <element number="107">
+		<name>Bohrium</name>
+		<symbol>Bh</symbol>
+		<mass>264</mass>
+		<valence>7</valence>
+	</element>
+        <element number="108">
+		<name>Hassium</name>
+		<symbol>Hs</symbol>
+		<mass>269</mass>
+		<valence>8</valence>
+	</element>
+        <element number="109">
+		<name>Meitnerium</name>
+		<symbol>Mt</symbol>
+		<mass>268</mass>
+		<valence>9</valence>
+	</element>
+        <element number="110">
+		<name>Darmstadtium</name>
+		<symbol>Ds</symbol>
+		<mass>269</mass>
+		<valence>10</valence>
+	</element>
+        <element number="111">
+		<name>Roentgenium</name>
+		<symbol>Rg</symbol>
+		<mass>272</mass>
+		<valence>1</valence>
+	</element>
+        <element number="112">
+		<name>Copernicium</name>
+		<symbol>Cn</symbol>
+		<mass>277</mass>
+		<valence>2</valence>
+	</element>
+        <element number="113">
+		<name>Ununtrium</name>
+		<symbol>Uut</symbol>
+		<mass>0</mass>
+		<valence>3</valence>
+	</element>
+        <element number="114">
+		<name>Flerovium</name>
+		<symbol>Fl</symbol>
+		<mass>289</mass>
+		<valence>4</valence>
+	</element>
+        <element number="115">
+		<name>Ununpentium</name>
+		<symbol>Uup</symbol>
+		<mass>0</mass>
+		<valence>5</valence>
+	</element>
+        <element number="116">
+		<name>Livermorium</name>
+		<symbol>Lv</symbol>
+		<mass>298</mass>
+		<valence>6</valence>
+	</element>
+        <element number="117">
+		<name>Ununseptium</name>
+		<symbol>Uus</symbol>
+		<mass>0</mass>
+		<valence>7</valence>
+	</element>
+        <element number="118">
+		<name>Ununoctium</name>
+		<symbol>Uuo</symbol>
+		<mass>0</mass>
+		<valence>8</valence>
+	</element>
+	<!--
+        <element number="">
+		<name></name>
+		<symbol></symbol>
+		<mass></mass>
+		<valence></valence>
+	</element>
+        -->
 </elements>

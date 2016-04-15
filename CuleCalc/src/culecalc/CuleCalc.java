@@ -13,16 +13,11 @@ import java.util.ArrayList;
  */
 public class CuleCalc extends javax.swing.JFrame {
     
-    public ArrayList<CElement> elements = new ArrayList<CElement>();
+    public static ArrayList<CElement> elements = new XMLReader("ElementInfo").getElements();;
     /**
      * Creates new form CuleCalc
      */
     public CuleCalc() {
-        XMLReader t = new XMLReader("ElementInfo");
-        elements = t.getElements();
-        for(CElement e : elements){
-            System.out.println(e);
-        }
         initComponents();
     }
 
@@ -133,6 +128,7 @@ public class CuleCalc extends javax.swing.JFrame {
 
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
         Formula t = new Formula(jFormulaField.getText());
+        System.out.println(t.getMass() + " amu");
     }//GEN-LAST:event_jCalculateActionPerformed
 
     /**
@@ -169,7 +165,9 @@ public class CuleCalc extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public ArrayList<CElement> getElements(){ return this.elements; }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCalculate;
     private javax.swing.JTextField jFormulaField;

@@ -19,4 +19,12 @@ public class Element extends Formula{
         this.neutrons = neutrons;
         this.mass = mass;
     }
+    public String getName(){ return this.name; }
+    public String getSymbol(){ return this.symbol; }
+    public int getProtons(){ return this.protons; }
+    public int getNumber(){ return this.protons; }
+    public int getElectrons(){ return this.electrons; }
+    public int getValence(){ return this.valence; }
+    public int getNeutrons(){ return this.neutrons; }
+    public double getMass(){ return this.mass; }
 }

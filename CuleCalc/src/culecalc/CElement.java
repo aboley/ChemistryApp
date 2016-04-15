@@ -1,6 +1,6 @@
 package culecalc;
 
-public class Element extends Formula{
+public class CElement{
     private String name;
     private String symbol;
     private int protons;
@@ -9,22 +9,33 @@ public class Element extends Formula{
     private int neutrons;
     private double mass;
     
-    public Element(){}
-    public Element(String name, String symbol, int protons, int electrons, int valence, int neutrons, double mass){
+    public CElement(){}
+    public CElement(String name, String symbol, int protons, int electrons, int neutrons, double mass, int valence){
         this.name = name;
         this.symbol = symbol;
         this.protons = protons;
         this.electrons = electrons;
-        this.valence = valence;
         this.neutrons = neutrons;
         this.mass = mass;
+        this.valence = valence;
     }
     public String getName(){ return this.name; }
     public String getSymbol(){ return this.symbol; }
     public int getProtons(){ return this.protons; }
     public int getNumber(){ return this.protons; }
     public int getElectrons(){ return this.electrons; }
-    public int getValence(){ return this.valence; }
     public int getNeutrons(){ return this.neutrons; }
     public double getMass(){ return this.mass; }
+    public int getValence(){ return this.valence; }
+    
+    @Override
+    public String toString(){
+        return "Name: " + this.name + "\n" +
+                "Symbol: " + this.symbol + "\n" +
+                "Protons: " + this.protons + "\n" +
+                "Electrons: " + this.electrons + "\n" +
+                "Neutrons: " + this.neutrons + "\n" +
+                "Mass: " + this.mass + "\n" +
+                "Valence: " + this.valence + "\n";
+    }
 }

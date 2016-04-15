@@ -5,16 +5,24 @@
  */
 package culecalc;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author WMHS_Lab67
+ * @author TetraGen
  */
 public class CuleCalc extends javax.swing.JFrame {
-
+    
+    public ArrayList<CElement> elements = new ArrayList<CElement>();
     /**
      * Creates new form CuleCalc
      */
     public CuleCalc() {
+        XMLReader t = new XMLReader("ElementInfo");
+        elements = t.getElements();
+        for(CElement e : elements){
+            System.out.println(e);
+        }
         initComponents();
     }
 
@@ -29,26 +37,58 @@ public class CuleCalc extends javax.swing.JFrame {
 
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
+        jFormulaField = new javax.swing.JTextField();
+        jCalculate = new javax.swing.JButton();
+        jPanelElements = new javax.swing.JPanel();
         jPanelSettings = new javax.swing.JPanel();
         jPanelAbout = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jCalculate.setText("Calculate");
+        jCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCalculateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCalculate)
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(jPanelMainLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCalculate))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Main", jPanelMain);
+
+        javax.swing.GroupLayout jPanelElementsLayout = new javax.swing.GroupLayout(jPanelElements);
+        jPanelElements.setLayout(jPanelElementsLayout);
+        jPanelElementsLayout.setHorizontalGroup(
+            jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        jPanelElementsLayout.setVerticalGroup(
+            jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 572, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneMain.addTab("Elements", jPanelElements);
 
         javax.swing.GroupLayout jPanelSettingsLayout = new javax.swing.GroupLayout(jPanelSettings);
         jPanelSettings.setLayout(jPanelSettingsLayout);
@@ -91,6 +131,10 @@ public class CuleCalc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
+        Formula t = new Formula(jFormulaField.getText());
+    }//GEN-LAST:event_jCalculateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -127,7 +171,10 @@ public class CuleCalc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jCalculate;
+    private javax.swing.JTextField jFormulaField;
     private javax.swing.JPanel jPanelAbout;
+    private javax.swing.JPanel jPanelElements;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSettings;
     private javax.swing.JTabbedPane jTabbedPaneMain;

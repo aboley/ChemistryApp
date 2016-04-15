@@ -1,15 +1,15 @@
 package culecalc;
 
-public class Compound extends Formula {
-    private static Element elements[];
+public class Compound{
+    private static CElement elements[];
     public Compound(){}
-    public Compound(Element elements[]){
+    public Compound(CElement elements[]){
         this.elements = elements;
     }
-    public Element[] getElements() { return this.elements; }
+    public CElement[] getElements() { return this.elements; }
     public double getMass(){
         double mass = 0;
-        for(Element e : elements)
+        for(CElement e : elements)
             mass += e.getMass();
         return mass;
     }

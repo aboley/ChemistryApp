@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE elements [
-  <!ELEMENT element (name,symbol,neutrons,mass,valence)>
+  <!ELEMENT element (name,symbol,mass,valence)>
   <!ATTLIST element number CDATA #REQUIRED>
   <!ELEMENT name (#PCDATA)>
   <!ELEMENT symbol (#PCDATA)>
-  <!ELEMENT neutrons (#PCDATA)>
   <!ELEMENT mass (#PCDATA)>
   <!ELEMENT valence (#PCDATA)>
 ]>
@@ -717,12 +716,4 @@
 		<mass>0</mass>
 		<valence>8</valence>
 	</element>
-	<!--
-        <element number="">
-		<name></name>
-		<symbol></symbol>
-		<mass></mass>
-		<valence></valence>
-	</element>
-        -->
 </elements>

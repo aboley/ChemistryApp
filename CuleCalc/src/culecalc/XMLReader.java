@@ -44,8 +44,7 @@ public class XMLReader {
       }
    }
    
-   public ArrayList<CElement> getElements(){ 
-       elements.add(0,new CElement("Unubtanium","Uub",0,0,0,0.0,0)); 
+   public ArrayList<CElement> getElements(){
        return this.elements;
    }
 }

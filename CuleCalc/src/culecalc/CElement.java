@@ -9,7 +9,7 @@ public class CElement{
     private int neutrons;
     private double mass;
     
-    public CElement(){}
+    public CElement(){ this("Unubtainium","Uub",0,0,0,0.0,0); }
     public CElement(String name, String symbol, int protons, int electrons, int neutrons, double mass, int valence){
         this.name = name;
         this.symbol = symbol;
@@ -30,12 +30,12 @@ public class CElement{
     
     @Override
     public String toString(){
-        return "Name: " + this.name + "\n" +
-                "Symbol: " + this.symbol + "\n" +
-                "Protons: " + this.protons + "\n" +
-                "Electrons: " + this.electrons + "\n" +
-                "Neutrons: " + this.neutrons + "\n" +
-                "Mass: " + this.mass + "\n" +
+        return "Name: " + this.name + "\n  " +
+                "Symbol: " + this.symbol + "\n  " +
+                "Protons: " + this.protons + "\n  " +
+                "Electrons: " + this.electrons + "\n  " +
+                "Neutrons: " + this.neutrons + "\n  " +
+                "Mass: " + this.mass + "\n  " +
                 "Valence: " + this.valence;
     }
 }

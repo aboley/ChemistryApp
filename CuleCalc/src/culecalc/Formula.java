@@ -1,23 +1,33 @@
 package culecalc;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Formula {
     private int coefficient;
     private String formula;
     private ArrayList<FormulaPart> elements = new ArrayList<FormulaPart>();
+    private double mass;
+    
     public Formula(){}
     public Formula(String formula){
-        this.formula = formula;
+        //Removes spaces
+        this.formula = formula.replaceAll("\\s", "");
         this.coefficient = getCoefficient();
         this.elements = getElements();
+        this.mass = getMass();
+        //Sets the % composition for each FormulaPart
+        for(FormulaPart f : elements)
+            f.setComposition(this.mass);
+    
     }
     
     public int getCoefficient(){
         //Uses a Regex lookahead to match first uppercase character and then splits between it and the previous character.
         String[] split = formula.split("(?=\\p{Upper})");
         try{
-            return formula.length() >= 1? (Integer.parseInt(!(split[0].charAt(0) > '0' && split[0].charAt(0) <= '9') ? "1" : split[0])) : 1;
+            return formula.length() >= 1 ? (Integer.parseInt(!(split[0].charAt(0) > '0' && split[0].charAt(0) <= '9') ? "1" : split[0])) : 1;
         }catch(Exception ex){
             //TODO: Print error message in panel.
             System.out.println("Check your formula for errors!");
@@ -27,11 +37,11 @@ public class Formula {
     
     //Returns an ArrayList of all the FormulaParts
     public ArrayList<FormulaPart> getElements(){
-        if(formula.length() == 0){ return new ArrayList<FormulaPart>(); }
+        if(this.formula.length() == 0){ return new ArrayList<FormulaPart>(); }
         
         ArrayList<FormulaPart> elements = new ArrayList<FormulaPart>();
         //TODO: Take ()'s into account
-        String[] split = formula.split("(?=\\p{Upper})");
+        String[] split = this.formula.split("(?=\\p{Upper})");
         for(int i = 0; i < split.length; i++){
             if(!(split[i].charAt(0) > '0' && split[i].charAt(0) <= '9')){
                 //Uses a Regex lookahead to split between the last character and first digit found.
@@ -50,24 +60,30 @@ public class Formula {
         return elements;
     }
     
+    public int getSize(){ return this.elements.size(); }
+    
     public double getMass(){
         double mass = 0.0;
-        for(FormulaPart f : elements){
+        for(FormulaPart f : this.elements){
             mass += f.getElement().getMass() * f.getCount();
         }
-        return mass * coefficient;
+        return mass * this.coefficient;
     }
+    
+    public String getMass(boolean unit){ return this.getMass() + (unit ? " amu" : ""); }
     
     /**
      * FormulaPart getPart(int i)
      * 
      * @param i
      * @return FormulaPart in the ArrayList elements
-     * 
-     * Usage:
+     */
+     /* Usage:
      *  {Formula object}.getPart(i).getElement() -> returns CElement of ArrayList<CElement> @ i
      *  {Formula object}.getPart(i).getCount() -> returns subscript/count of the CElement of ArrayList<CElement> @ i
      *  {Formula object}.getPart(i).getMass() -> returns the mass of the FormulaPart factoring in the subscript/count
+     *  {Formula object}.getPart(i).getComposition() -> returns the % composition as a double
+     *  {Formula object}.getPart(i).getComposition(boolean) -> returns the % composition as a formatted string or unformated
      */
     
     //Returns a part of a formula or Unobtainium if out of bounds or nonexistant 
@@ -77,10 +93,12 @@ public class Formula {
     public String toString(){ return this.formula; }
 }
 
-//Data structure for parts of a formula containing the CElement and its subscript/count
+//Data structure for parts of a formula containing the CElement and its subscript/count and its % composition
 class FormulaPart {
     private CElement element;
     private int count;
+    private double composition;
+    
     public FormulaPart(){ this(CuleCalc.elements.get(0),1);}
     public FormulaPart(CElement element, int count){
         this.element = element;
@@ -89,8 +107,15 @@ class FormulaPart {
     public CElement getElement(){ return this.element; }
     public int getCount(){ return this.count; }
     public int getSubscript(){ return this.count; }
-    public double getMass(){ return element.getMass() * count; }
-    
+    public double getMass(){ return this.element.getMass() * count; }
+    public void setComposition(double formulaMass){ this.composition = this.getMass() / formulaMass; }
+    public double getComposition(){ return this.composition; }
+    public String getComposition(boolean format){
+        NumberFormat percentFormat = NumberFormat.getPercentInstance();
+	percentFormat.setMinimumFractionDigits(2);
+        return format ? percentFormat.format(this.getComposition()) : String.valueOf(this.composition);
+    }
+
     @Override
     public String toString(){ return this.element.getSymbol() + this.count; }
 }

@@ -6,7 +6,7 @@
 package culecalc;
 
 import java.util.ArrayList;
-
+import java.text.NumberFormat;
 /**
  *
  * @author TetraGen
@@ -128,7 +128,9 @@ public class CuleCalc extends javax.swing.JFrame {
 
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
         Formula t = new Formula(jFormulaField.getText());
-        System.out.println(t.getPart(0).getElement());
+        
+        for(int i = 0; i < t.getSize(); i++)
+            System.out.println(t.getPart(i).getComposition(true));
     }//GEN-LAST:event_jCalculateActionPerformed
 
     /**

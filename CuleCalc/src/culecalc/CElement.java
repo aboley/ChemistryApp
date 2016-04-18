@@ -9,7 +9,7 @@ public class CElement{
     private int neutrons;
     private double mass;
     
-    public CElement(){ this("Unubtainium","Uub",0,0,0,0.0,0); }
+    public CElement(){ this("Unobtainium","Uub",0,0,0,0.0,0); }
     public CElement(String name, String symbol, int protons, int electrons, int neutrons, double mass, int valence){
         this.name = name;
         this.symbol = symbol;

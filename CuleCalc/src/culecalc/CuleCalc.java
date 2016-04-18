@@ -127,7 +127,7 @@ public class CuleCalc extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
-        Formula t = new Formula(jFormulaField.getText());
+        CFormula t = new CFormula(jFormulaField.getText());
         System.out.println(t.getMass(true));
         for(int i = 0; i < t.getSize(); i++)
             System.out.println(t.getPart(i).getComposition(true));

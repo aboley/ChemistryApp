@@ -3,21 +3,21 @@ package culecalc;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class Formula {
+public class CFormula {
     private long coefficient;
     private String formula;
-    private ArrayList<FormulaPart> elements = new ArrayList<FormulaPart>();
+    private ArrayList<CFormulaPart> elements = new ArrayList<CFormulaPart>();
     private double mass;
     
-    public Formula(){}
-    public Formula(String formula){
+    public CFormula(){}
+    public CFormula(String formula){
         //Removes spaces
         this.formula = formula.replaceAll("\\s", "");
         this.coefficient = getCoefficient();
         this.elements = getElements();
         this.mass = getMass();
         //Sets the % composition for each FormulaPart
-        for(FormulaPart f : elements)
+        for(CFormulaPart f : elements)
             f.setComposition(this.mass / this.coefficient);
     
     }
@@ -35,10 +35,10 @@ public class Formula {
     }
     
     //Returns an ArrayList of all the FormulaParts
-    public final ArrayList<FormulaPart> getElements(){
-        if(this.formula.length() == 0){ return new ArrayList<FormulaPart>(); }
+    public final ArrayList<CFormulaPart> getElements(){
+        if(this.formula.length() == 0){ return new ArrayList<CFormulaPart>(); }
         
-        ArrayList<FormulaPart> elements = new ArrayList<FormulaPart>();
+        ArrayList<CFormulaPart> elements = new ArrayList<CFormulaPart>();
         //TODO: Take ()'s into account
         String[] split = this.formula.split("(?=\\p{Upper})");
         for(int i = 0; i < split.length; i++){
@@ -52,7 +52,7 @@ public class Formula {
                         break;
                     }
                 }
-                elements.add(new FormulaPart(element, e.length > 1 ? Integer.parseInt(e[1]) : 1 ));
+                elements.add(new CFormulaPart(element, e.length > 1 ? Integer.parseInt(e[1]) : 1 ));
             }
         }
         
@@ -63,7 +63,7 @@ public class Formula {
     
     public final double getMass(){
         double mass = 0.0;
-        for(FormulaPart f : this.elements){
+        for(CFormulaPart f : this.elements){
             mass += f.getElement().getMass() * f.getCount();
         }
         return mass * this.coefficient;
@@ -72,35 +72,34 @@ public class Formula {
     public String getMass(boolean units){ return this.getMass() + (units ? " amu" : ""); }
     
     /**
-     * FormulaPart getPart(int i)
+     * CFormulaPart getPart(int i)
      * 
      * @param i
      * @return FormulaPart in the ArrayList elements
-     */
-     /* Usage:
+     * Usage:
      *  {Formula object}.getPart(i).getElement() -> returns CElement of ArrayList<CElement> @ i
      *  {Formula object}.getPart(i).getCount() -> returns subscript/count of the CElement of ArrayList<CElement> @ i
-     *  {Formula object}.getPart(i).getMass() -> returns the mass of the FormulaPart as a dobule factoring in the subscript/count
-     *  {Formula object}.getPart(i).getMass(boolean) -> returns the mass of the FormulaPart as a string with or without units
+     *  {Formula object}.getPart(i).getMass() -> returns the mass of the CFormulaPart as a double factoring in the subscript/count
+     *  {Formula object}.getPart(i).getMass(boolean) -> returns the mass of the CFormulaPart as a string with or without units
      *  {Formula object}.getPart(i).getComposition() -> returns the % composition as a double
-     *  {Formula object}.getPart(i).getComposition(boolean) -> returns the % composition as a formatted string or unformated
+     *  {Formula object}.getPart(i).getComposition(boolean) -> returns the % composition as a formatted string or unformatted
      */
     
     //Returns a part of a formula or Unobtainium if out of bounds or nonexistant 
-    public FormulaPart getPart(int i){ if(i >= elements.size()){ return new FormulaPart(); }else{ return elements.get(i); } }
+    public CFormulaPart getPart(int i){ if(i >= elements.size()){ return new CFormulaPart(); }else{ return elements.get(i); } }
     
     @Override
     public String toString(){ return this.formula; }
 }
 
 //Data structure for parts of a formula containing the CElement and its subscript/count and its % composition
-class FormulaPart {
+class CFormulaPart {
     private CElement element;
     private int count;
     private double composition;
     
-    public FormulaPart(){ this(CuleCalc.elements.get(0),1);}
-    public FormulaPart(CElement element, int count){
+    public CFormulaPart(){ this(CuleCalc.elements.get(0),1);}
+    public CFormulaPart(CElement element, int count){
         this.element = element;
         this.count = count;
     }

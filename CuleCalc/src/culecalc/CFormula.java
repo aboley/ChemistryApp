@@ -12,7 +12,7 @@ public class CFormula {
     public CFormula(){}
     public CFormula(String formula){
         //Removes spaces
-        this.formula = formula.replaceAll("\\s", "");
+        this.formula = formatFormula(formula);
         this.coefficient = getCoefficient();
         this.elements = getElements();
         this.mass = getMass();
@@ -20,6 +20,26 @@ public class CFormula {
         for(CFormulaPart f : elements)
             f.setComposition(this.mass / this.coefficient);
     
+    }
+    
+    //
+    public final String formatFormula(String a){
+        String ff ="";
+        a.replaceAll("\\s", "");
+        String[] split = this.formula.split("");
+        for(int i = 0; i < split.length; i++){
+            if(split[i].equals("(")) {
+                
+            }
+        }  
+        for(int i = 0; i < split.length; i++){
+            if(!(split[i].charAt(0) > '0' && split[i].charAt(0) <= '9')){
+                //Uses a Regex lookahead to split between the last character and first digit found.
+                String[] e = split[i].split("(?<=[\\w&&\\D])(?=\\d)");
+            }
+        }
+        
+        return ff;
     }
     
     public final long getCoefficient(){

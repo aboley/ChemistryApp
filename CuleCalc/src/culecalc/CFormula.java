@@ -29,7 +29,7 @@ public class CFormula {
         String[] split = this.formula.split("");
         for(int i = 0; i < split.length; i++){
             if(split[i].equals("(")) {
-                System.out.println("Bitches");
+                
             }
         }  
         for(int i = 0; i < split.length; i++){

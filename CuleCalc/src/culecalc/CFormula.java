@@ -27,17 +27,53 @@ public class CFormula {
         String ff ="";
         a.replaceAll("\\s", "");
         String[] split = this.formula.split("");
+        int count = 0;
         for(int i = 0; i < split.length; i++){
             if(split[i].equals("(")) {
-                
-            }
-        }  
-        for(int i = 0; i < split.length; i++){
-            if(!(split[i].charAt(0) > '0' && split[i].charAt(0) <= '9')){
-                //Uses a Regex lookahead to split between the last character and first digit found.
-                String[] e = split[i].split("(?<=[\\w&&\\D])(?=\\d)");
+                count++;
             }
         }
+        
+        int [] index = new int[count*2];
+        int indexCount = 0;
+        
+        for(int i = 0; i <split.length; i++){
+            if(split[i].equals("(")) {
+                index[indexCount] = i;
+                indexCount++;
+            }
+            if(split[i].equals(")")) {
+                index[indexCount] = i;
+                indexCount++;
+            }
+        }
+        
+        int flag = 0;
+        int countnumber = 0;
+        int tempInt = 0;
+        String tempString = "";
+        ArrayList <Integer> coefficientList = new ArrayList<>();
+        
+        for(int i = 0; i < index.length; i+=2) {
+            while(flag == 0){
+                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
+                    countnumber++;
+                }
+                else{
+                    flag = 1;
+                }
+            }
+            for(int j = countnumber; j <= 0; j--){
+                tempString += split[index[i]-countnumber];
+            }
+            tempInt = Integer.parseInt(tempString);
+            coefficientList.add(tempInt);
+            countnumber = 0;
+            tempInt = 0;
+            tempString = "";
+            flag = 0;
+        }
+        
         
         return ff;
     }

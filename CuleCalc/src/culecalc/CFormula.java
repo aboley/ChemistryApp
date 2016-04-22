@@ -74,6 +74,21 @@ public class CFormula {
             flag = 0;
         }
         
+        int counter1 = 0;
+        int tempInt1 = 0;
+        String tempString1 = "";
+        
+        for(int i = 0; i < index.length; i+=2){
+            for(int j = index[i]; j < index[i+1]; j++){
+                if(split[j].charAt(0) > '0' && split[j].charAt(0) <= '9') {
+                    tempInt1 = Integer.parseInt(split[j]) * coefficientList.get(counter1);
+                    tempString1 += tempInt1;
+                    split[j] = tempString1;
+                }
+            }
+        }
+        
+        
         
         return ff;
     }

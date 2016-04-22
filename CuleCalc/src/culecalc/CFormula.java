@@ -26,7 +26,7 @@ public class CFormula {
     public final String formatFormula(String a){
         String ff ="";
         a.replaceAll("\\s", "");
-        String[] split = this.formula.split("");
+        String[] split = a.split("");
         int count = 0;
         for(int i = 0; i < split.length; i++){
             if(split[i].equals("(")) {
@@ -54,26 +54,36 @@ public class CFormula {
         String tempString = "";
         ArrayList <Integer> coefficientList = new ArrayList<>();
         
+        
+        
         for(int i = 0; i < index.length; i+=2) {
             while(flag == 0){
-                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
+                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9' && index[i]-countnumber >= 0) {
                     countnumber++;
                 }
                 else{
                     flag = 1;
                 }
             }
+            System.out.println("Cool");
+            /*
             for(int j = countnumber; j <= 0; j--){
                 tempString += split[index[i]-countnumber];
             }
-            tempInt = Integer.parseInt(tempString);
-            coefficientList.add(tempInt);
+            */
+            //tempInt = Integer.parseInt(tempString);
+            //coefficientList.add(tempInt);
             countnumber = 0;
             tempInt = 0;
             tempString = "";
             flag = 0;
         }
         
+        for(int i = 0; i < coefficientList.size(); i++) {
+            System.out.println(coefficientList.get(i));
+        }
+        
+        /*
         int counter1 = 0;
         int tempInt1 = 0;
         String tempString1 = "";
@@ -88,8 +98,24 @@ public class CFormula {
             }
         }
         
+        for(int i = 0; i < index.length; i+=2) {
+            while(flag == 0){
+                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
+                    countnumber++;
+                    split[index[i]- countnumber] = "";
+                }
+                else{
+                    flag = 1;
+                }
+            }
+            split[index[i]] = "";
+            split[index[i+1]] = "";
+        }
         
-        
+        for(int i = 0; i < split.length; i++) {
+            ff += split[i];
+        }
+        */
         return ff;
     }
     

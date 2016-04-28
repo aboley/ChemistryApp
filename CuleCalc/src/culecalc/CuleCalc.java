@@ -6,7 +6,10 @@
 package culecalc;
 
 import java.util.ArrayList;
-import java.text.NumberFormat;
+import java.awt.ItemSelectable;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 /**
  *
  * @author TetraGen
@@ -19,8 +22,30 @@ public class CuleCalc extends javax.swing.JFrame {
      */
     public CuleCalc() {
         initComponents();
+        initComboBox();
     }
-
+    
+    private void initComboBox(){
+        for (int i = 0; i < elements.size(); i++)
+            jElementList.addItem(elements.get(i).getSymbol());
+        ItemListener itemListener = new ItemListener() {
+        public void itemStateChanged(ItemEvent itemEvent) {
+            int state = itemEvent.getStateChange();
+            //System.out.println((state == ItemEvent.SELECTED) ? "Selected" : "Deselected");
+            //System.out.println("Item: " + itemEvent.getItem());
+            CElement sel = new CElement();
+            
+            for(CElement e : elements)
+                if(e.getSymbol().equals(itemEvent.getItem())){
+                    sel = e;
+                    break;
+                }
+            }
+            jElementName.setText(sel.getName());
+            jElementSymbol.setText(sel.getSymbol());
+        };
+        jElementList.addItemListener(itemListener);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +60,9 @@ public class CuleCalc extends javax.swing.JFrame {
         jFormulaField = new javax.swing.JTextField();
         jCalculate = new javax.swing.JButton();
         jPanelElements = new javax.swing.JPanel();
+        jElementList = new javax.swing.JComboBox();
+        jElementName = new javax.swing.JLabel();
+        jElementSymbol = new javax.swing.JLabel();
         jPanelSettings = new javax.swing.JPanel();
         jPanelAbout = new javax.swing.JPanel();
 
@@ -72,15 +100,41 @@ public class CuleCalc extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Main", jPanelMain);
 
+        jElementList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jElementListActionPerformed(evt);
+            }
+        });
+
+        jElementName.setText("[Element Name]");
+
+        jElementSymbol.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jElementSymbol.setText("[S]");
+
         javax.swing.GroupLayout jPanelElementsLayout = new javax.swing.GroupLayout(jPanelElements);
         jPanelElements.setLayout(jPanelElementsLayout);
         jPanelElementsLayout.setHorizontalGroup(
             jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanelElementsLayout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addGroup(jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jElementName)
+                    .addGroup(jPanelElementsLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jElementList, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jElementSymbol))
+                .addGap(389, 389, 389))
         );
         jPanelElementsLayout.setVerticalGroup(
             jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(jPanelElementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jElementList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
+                .addComponent(jElementSymbol)
+                .addGap(18, 18, 18)
+                .addComponent(jElementName)
+                .addContainerGap())
         );
 
         jTabbedPaneMain.addTab("Elements", jPanelElements);
@@ -133,6 +187,10 @@ public class CuleCalc extends javax.swing.JFrame {
             System.out.println(t.getPart(i).getComposition(true));
     }//GEN-LAST:event_jCalculateActionPerformed
 
+    private void jElementListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElementListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jElementListActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,6 +230,9 @@ public class CuleCalc extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCalculate;
+    private javax.swing.JComboBox jElementList;
+    private javax.swing.JLabel jElementName;
+    private javax.swing.JLabel jElementSymbol;
     private javax.swing.JTextField jFormulaField;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;

@@ -12,7 +12,8 @@ public class CFormula {
     public CFormula(){}
     public CFormula(String formula){
         //Removes spaces
-        this.formula = formatFormula(formula);
+        //this.formula = formatFormula(formula);
+        this.formula = formula.replaceAll("\\s", "");
         this.coefficient = getCoefficient();
         this.elements = getElements();
         this.mass = getMass();
@@ -167,6 +168,40 @@ public class CFormula {
     }
     
     public String getMass(boolean units){ return this.getMass() + (units ? " amu" : ""); }
+    
+    public static int findGCF(int[] numbers) {
+        int min = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] < min) {
+                min = numbers[i];
+            }
+        }
+        while (min > 1) {
+            int count = 0;
+            int mod = 0;
+            while (count < numbers.length) {
+                mod += numbers[count] % min;
+                count++;
+            }
+            
+            if (mod == 0) {
+                return min;
+            }
+            min--;
+        }
+        return -1;
+    }
+    
+    public String getEmpirical(){
+        int[] subs = new int[elements.size()];
+        int count = 0;
+        
+        for(CFormulaPart cf : elements)
+            subs[count++] = cf.getSubscript();
+        
+        int gcf = findGCF(subs);
+        return "";
+    }
     
     /**
      * CFormulaPart getPart(int i)

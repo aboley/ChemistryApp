@@ -14,111 +14,116 @@ public class CFormula {
         //Removes spaces
         //this.formula = formatFormula(formula);
         this.formula = formula.replaceAll("\\s", "");
+        formatFormula(formula);
         this.coefficient = getCoefficient();
         this.elements = getElements();
         this.mass = getMass();
         //Sets the % composition for each FormulaPart
         for(CFormulaPart f : elements)
             f.setComposition(this.mass / this.coefficient);
+        
+    }
     
+    public final String formatFormula(String i){
+        String[] split = i.split("(?=[(]\\w+[)]\\d+)", -1);
+        for(String s : split)
+            System.out.println(s);
+        return "";
     }
     
     //
-    public final String formatFormula(String a){
-        String ff ="";
-        a.replaceAll("\\s", "");
-        String[] split = a.split("");
-        int count = 0;
-        for(int i = 0; i < split.length; i++){
-            if(split[i].equals("(")) {
-                count++;
-            }
-        }
-        
-        int [] index = new int[count*2];
-        int indexCount = 0;
-        
-        for(int i = 0; i <split.length; i++){
-            if(split[i].equals("(")) {
-                index[indexCount] = i;
-                indexCount++;
-            }
-            if(split[i].equals(")")) {
-                index[indexCount] = i;
-                indexCount++;
-            }
-        }
-        
-        int flag = 0;
-        int countnumber = 0;
-        int tempInt = 0;
-        String tempString = "";
-        ArrayList <Integer> coefficientList = new ArrayList<>();
-        
-        
-        
-        for(int i = 0; i < index.length; i+=2) {
-            while(flag == 0){
-                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9' && index[i]-countnumber >= 0) {
-                    countnumber++;
-                }
-                else{
-                    flag = 1;
-                }
-            }
-            System.out.println("Cool");
-            /*
-            for(int j = countnumber; j <= 0; j--){
-                tempString += split[index[i]-countnumber];
-            }
-            */
-            //tempInt = Integer.parseInt(tempString);
-            //coefficientList.add(tempInt);
-            countnumber = 0;
-            tempInt = 0;
-            tempString = "";
-            flag = 0;
-        }
-        
-        for(int i = 0; i < coefficientList.size(); i++) {
-            System.out.println(coefficientList.get(i));
-        }
-        
-        /*
-        int counter1 = 0;
-        int tempInt1 = 0;
-        String tempString1 = "";
-        
-        for(int i = 0; i < index.length; i+=2){
-            for(int j = index[i]; j < index[i+1]; j++){
-                if(split[j].charAt(0) > '0' && split[j].charAt(0) <= '9') {
-                    tempInt1 = Integer.parseInt(split[j]) * coefficientList.get(counter1);
-                    tempString1 += tempInt1;
-                    split[j] = tempString1;
-                }
-            }
-        }
-        
-        for(int i = 0; i < index.length; i+=2) {
-            while(flag == 0){
-                if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
-                    countnumber++;
-                    split[index[i]- countnumber] = "";
-                }
-                else{
-                    flag = 1;
-                }
-            }
-            split[index[i]] = "";
-            split[index[i+1]] = "";
-        }
-        
-        for(int i = 0; i < split.length; i++) {
-            ff += split[i];
-        }
-        */
-        return ff;
-    }
+//    public final String formatFormula(String a) {
+//        String ff = "";
+//        a.replaceAll("\\s", "");
+//        String[] split = a.split("");
+//        int count = 0;
+//        for (int i = 0; i < split.length; i++) {
+//            if (split[i].equals("(")) {
+//                count++;
+//            }
+//        }
+//
+//        int[] index = new int[count * 2];
+//        int indexCount = 0;
+//
+//        for (int i = 0; i < split.length; i++) {
+//            if (split[i].equals("(")) {
+//                index[indexCount] = i;
+//                indexCount++;
+//            }
+//            if (split[i].equals(")")) {
+//                index[indexCount] = i;
+//                indexCount++;
+//            }
+//        }
+//
+//        int flag = 0;
+//        int countnumber = 0;
+//        int tempInt = 0;
+//        String tempString = "";
+//        ArrayList<Integer> coefficientList = new ArrayList<>();
+//
+//        for (int i = 0; i < index.length; i += 2) {
+//            while (flag == 0) {
+//                if (split[index[i] - countnumber].charAt(0) > '0' && split[index[i] - countnumber].charAt(0) <= '9' && index[i] - countnumber >= 0) {
+//                    countnumber++;
+//                } else {
+//                    flag = 1;
+//                }
+//            }
+//            System.out.println("Cool");
+//            /*
+//             for(int j = countnumber; j <= 0; j--){
+//             tempString += split[index[i]-countnumber];
+//             }
+//             */
+//            //tempInt = Integer.parseInt(tempString);
+//            //coefficientList.add(tempInt);
+//            countnumber = 0;
+//            tempInt = 0;
+//            tempString = "";
+//            flag = 0;
+//        }
+//
+//        for (int i = 0; i < coefficientList.size(); i++) {
+//            System.out.println(coefficientList.get(i));
+//        }
+//
+//        /*
+//         int counter1 = 0;
+//         int tempInt1 = 0;
+//         String tempString1 = "";
+//        
+//         for(int i = 0; i < index.length; i+=2){
+//         for(int j = index[i]; j < index[i+1]; j++){
+//         if(split[j].charAt(0) > '0' && split[j].charAt(0) <= '9') {
+//         tempInt1 = Integer.parseInt(split[j]) * coefficientList.get(counter1);
+//         tempString1 += tempInt1;
+//         split[j] = tempString1;
+//         }
+//         }
+//         }
+//        
+//         for(int i = 0; i < index.length; i+=2) {
+//         while(flag == 0){
+//         if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
+//         countnumber++;
+//         split[index[i]- countnumber] = "";
+//         }
+//         else{
+//         flag = 1;
+//         }
+//         }
+//         split[index[i]] = "";
+//         split[index[i+1]] = "";
+//         }
+//        
+//         for(int i = 0; i < split.length; i++) {
+//         ff += split[i];
+//         }
+//         */
+//        return ff;
+//    }
     
     public final long getCoefficient(){
         //Uses a Regex lookahead to match first uppercase character and then splits between it and the previous character.
@@ -200,7 +205,11 @@ public class CFormula {
             subs[count++] = cf.getSubscript();
         
         int gcf = findGCF(subs);
-        return "";
+        String s = "";
+        for(CFormulaPart cf : elements){
+            s += cf.getElement().getSymbol() + (cf.getSubscript() / gcf);
+        }
+        return s;
     }
     
     /**

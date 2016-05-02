@@ -6,15 +6,14 @@ import java.util.ArrayList;
 public class CFormula {
     private long coefficient;
     private String formula;
-    private ArrayList<CFormulaPart> elements = new ArrayList<CFormulaPart>();
+    private ArrayList<CFormulaPart> elements = new ArrayList<>();
     private double mass;
     
     public CFormula(){}
     public CFormula(String formula){
         //Removes spaces
         //this.formula = formatFormula(formula);
-        this.formula = formula.replaceAll("\\s", "");
-        formatFormula(formula);
+        this.formula = formatFormula(formula);
         this.coefficient = getCoefficient();
         this.elements = getElements();
         this.mass = getMass();
@@ -24,106 +23,29 @@ public class CFormula {
         
     }
     
-    public final String formatFormula(String i){
-        String[] split = i.split("(?=[(]\\w+[)]\\d+)", -1);
-        for(String s : split)
-            System.out.println(s);
-        return "";
+    public final String formatFormula(String in){
+        String out = "";
+        String[] split = in.replaceAll("\\s", "").split("(?=[(]\\w+[)]\\d+)", -1);
+        for(int i = 0; i < split.length; i++){
+            int coef = 1;
+            try{
+                coef = Integer.parseInt(split[i].split("[)]")[1]);
+            }catch(Exception ex){
+            }
+            if(coef == 1){ out += split[i]; continue; }
+            String temp = split[i].substring(1).replaceAll("([)]\\d+)", "");
+            String[] resplit = temp.split("(?=\\p{Upper})");
+            for(String e : resplit){
+                String[] reresplit = e.split("(?<=[\\w&&\\D])(?=\\d)");
+                int subscript = reresplit.length > 1 ? Integer.parseInt(reresplit[1]) : 1;
+                subscript *= coef;
+               out += reresplit[0] + subscript;
+            }
+            
+        }
+        out = out.replaceAll("([(]|[)])", "");
+        return out;
     }
-    
-    //
-//    public final String formatFormula(String a) {
-//        String ff = "";
-//        a.replaceAll("\\s", "");
-//        String[] split = a.split("");
-//        int count = 0;
-//        for (int i = 0; i < split.length; i++) {
-//            if (split[i].equals("(")) {
-//                count++;
-//            }
-//        }
-//
-//        int[] index = new int[count * 2];
-//        int indexCount = 0;
-//
-//        for (int i = 0; i < split.length; i++) {
-//            if (split[i].equals("(")) {
-//                index[indexCount] = i;
-//                indexCount++;
-//            }
-//            if (split[i].equals(")")) {
-//                index[indexCount] = i;
-//                indexCount++;
-//            }
-//        }
-//
-//        int flag = 0;
-//        int countnumber = 0;
-//        int tempInt = 0;
-//        String tempString = "";
-//        ArrayList<Integer> coefficientList = new ArrayList<>();
-//
-//        for (int i = 0; i < index.length; i += 2) {
-//            while (flag == 0) {
-//                if (split[index[i] - countnumber].charAt(0) > '0' && split[index[i] - countnumber].charAt(0) <= '9' && index[i] - countnumber >= 0) {
-//                    countnumber++;
-//                } else {
-//                    flag = 1;
-//                }
-//            }
-//            System.out.println("Cool");
-//            /*
-//             for(int j = countnumber; j <= 0; j--){
-//             tempString += split[index[i]-countnumber];
-//             }
-//             */
-//            //tempInt = Integer.parseInt(tempString);
-//            //coefficientList.add(tempInt);
-//            countnumber = 0;
-//            tempInt = 0;
-//            tempString = "";
-//            flag = 0;
-//        }
-//
-//        for (int i = 0; i < coefficientList.size(); i++) {
-//            System.out.println(coefficientList.get(i));
-//        }
-//
-//        /*
-//         int counter1 = 0;
-//         int tempInt1 = 0;
-//         String tempString1 = "";
-//        
-//         for(int i = 0; i < index.length; i+=2){
-//         for(int j = index[i]; j < index[i+1]; j++){
-//         if(split[j].charAt(0) > '0' && split[j].charAt(0) <= '9') {
-//         tempInt1 = Integer.parseInt(split[j]) * coefficientList.get(counter1);
-//         tempString1 += tempInt1;
-//         split[j] = tempString1;
-//         }
-//         }
-//         }
-//        
-//         for(int i = 0; i < index.length; i+=2) {
-//         while(flag == 0){
-//         if(split[index[i]- countnumber].charAt(0) > '0' && split[index[i]- countnumber].charAt(0) <= '9') {
-//         countnumber++;
-//         split[index[i]- countnumber] = "";
-//         }
-//         else{
-//         flag = 1;
-//         }
-//         }
-//         split[index[i]] = "";
-//         split[index[i+1]] = "";
-//         }
-//        
-//         for(int i = 0; i < split.length; i++) {
-//         ff += split[i];
-//         }
-//         */
-//        return ff;
-//    }
     
     public final long getCoefficient(){
         //Uses a Regex lookahead to match first uppercase character and then splits between it and the previous character.
@@ -138,10 +60,9 @@ public class CFormula {
     }
     
     //Returns an ArrayList of all the FormulaParts
-    public final ArrayList<CFormulaPart> getElements(){
-        if(this.formula.length() == 0){ return new ArrayList<CFormulaPart>(); }
+    private final ArrayList<CFormulaPart> getElements(){
+        if(this.formula.length() == 0){ return new ArrayList<>(); }
         
-        ArrayList<CFormulaPart> elements = new ArrayList<CFormulaPart>();
         //TODO: Take ()'s into account
         String[] split = this.formula.split("(?=\\p{Upper})");
         for(int i = 0; i < split.length; i++){
@@ -155,11 +76,34 @@ public class CFormula {
                         break;
                     }
                 }
-                elements.add(new CFormulaPart(element, e.length > 1 ? Integer.parseInt(e[1]) : 1 ));
+                int subscript = e.length > 1 ? Integer.parseInt(e[1]) : 1;
+                if(!exists(element)){
+                    elements.add(new CFormulaPart(element, subscript));
+                }else{
+                    for(CFormulaPart cf : elements){
+                        if(cf.getElement().equals(element)){
+                            cf.addCount(subscript);
+                            break;
+                        }
+                    }
+                }
             }
         }
         
+        this.formula = "";
+        for(CFormulaPart cf : elements)
+            this.formula += cf.getElement().getSymbol() + cf.getSubscript();
+        
         return elements;
+    }
+    
+    public boolean exists(CElement e){
+        for(CFormulaPart cf : elements){
+            if(cf.getElement().equals(e)){
+               return true;
+           }
+        }
+        return false;
     }
     
     public int getSize(){ return this.elements.size(); }
@@ -194,7 +138,7 @@ public class CFormula {
             }
             min--;
         }
-        return -1;
+        return 1;
     }
     
     public String getEmpirical(){
@@ -207,7 +151,7 @@ public class CFormula {
         int gcf = findGCF(subs);
         String s = "";
         for(CFormulaPart cf : elements){
-            s += cf.getElement().getSymbol() + (cf.getSubscript() / gcf);
+            s += cf.getElement().getSymbol() + ((cf.getSubscript() / gcf) > 1 ? (cf.getSubscript() / gcf) : "");
         }
         return s;
     }
@@ -247,6 +191,7 @@ class CFormulaPart {
     public CElement getElement(){ return this.element; }
     public int getCount(){ return this.count; }
     public int getSubscript(){ return this.count; }
+    public void addCount(int subscript){ this.count += subscript; }
     public double getMass(){ return this.element.getMass() * count; }
     public String getMass(boolean units){ return this.getMass() + (units ? " amu" : ""); }
     public void setComposition(double formulaMass){ this.composition = this.getMass() / formulaMass; }

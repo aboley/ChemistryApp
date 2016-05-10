@@ -28,6 +28,10 @@ public class CElement{
     public double getMass(){ return this.mass; }
     public int getValence(){ return this.valence; }
     
+    public boolean equals(CElement e){
+        return e.getSymbol().equals(this.symbol);
+    }
+    
     @Override
     public String toString(){
         return "Name: " + this.name + "\n  " +

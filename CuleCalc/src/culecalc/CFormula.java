@@ -11,8 +11,6 @@ public class CFormula {
     
     public CFormula(){}
     public CFormula(String formula){
-        //Removes spaces
-        //this.formula = formatFormula(formula);
         this.formula = formatFormula(formula);
         this.coefficient = getCoefficient();
         this.elements = getElements();

@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.awt.ItemSelectable;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLDecoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 /**
  *
@@ -16,36 +25,32 @@ import java.awt.event.ItemListener;
  */
 public class CuleCalc extends javax.swing.JFrame {
     
-    public static ArrayList<CElement> elements = new XMLReader("ElementInfo").getElements();;
+    private boolean bUseElementName;
+    
+    public static ArrayList<CElement> elements = new XMLReader("ElementInfo").getElements();
     /**
      * Creates new form CuleCalc
      */
     public CuleCalc() {
         initComponents();
+        try{
+            loadProperties();
+        }catch(Exception ex){
+            saveProperties();
+        }
         initComboBox();
+        initSettings();
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                saveProperties();
+            }
+        });
     }
     
-    private void initComboBox(){
-        for (int i = 0; i < elements.size(); i++)
-            jElementList.addItem(elements.get(i).getSymbol());
-        ItemListener itemListener = new ItemListener() {
-        public void itemStateChanged(ItemEvent itemEvent) {
-            int state = itemEvent.getStateChange();
-            //System.out.println((state == ItemEvent.SELECTED) ? "Selected" : "Deselected");
-            //System.out.println("Item: " + itemEvent.getItem());
-            CElement sel = new CElement();
-            
-            for(CElement e : elements)
-                if(e.getSymbol().equals(itemEvent.getItem())){
-                    sel = e;
-                    break;
-                }
-            }
-            jElementName.setText(sel.getName());
-            jElementSymbol.setText(sel.getSymbol());
-        };
-        jElementList.addItemListener(itemListener);
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,13 +67,18 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelElements = new javax.swing.JPanel();
         jElementList = new javax.swing.JComboBox();
         jElementName = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jElementSymbol = new javax.swing.JLabel();
         jPanelSettings = new javax.swing.JPanel();
+        jUseElementName = new javax.swing.JCheckBox();
         jPanelAbout = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(320, 320));
+        setMinimumSize(new java.awt.Dimension(320, 320));
+        setPreferredSize(new java.awt.Dimension(320, 320));
+
+        jTabbedPaneMain.setPreferredSize(new java.awt.Dimension(320, 320));
 
         jCalculate.setText("Calculate");
         jCalculate.addActionListener(new java.awt.event.ActionListener() {
@@ -82,72 +92,86 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCalculate)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jCalculate)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCalculate))
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCalculate)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Main", jPanelMain);
+
+        jPanelElements.setLayout(null);
 
         jElementList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jElementListActionPerformed(evt);
             }
         });
+        jPanelElements.add(jElementList);
+        jElementList.setBounds(97, 20, 110, 20);
 
         jElementName.setText("[Element Name]");
+        jPanelElements.add(jElementName);
+        jElementName.setBounds(120, 170, 76, 14);
 
         jElementSymbol.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jElementSymbol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jElementSymbol.setText("[S]");
 
-        javax.swing.GroupLayout jPanelElementsLayout = new javax.swing.GroupLayout(jPanelElements);
-        jPanelElements.setLayout(jPanelElementsLayout);
-        jPanelElementsLayout.setHorizontalGroup(
-            jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelElementsLayout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addGroup(jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jElementName)
-                    .addGroup(jPanelElementsLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jElementList, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jElementSymbol))
-                .addGap(389, 389, 389))
-        );
-        jPanelElementsLayout.setVerticalGroup(
-            jPanelElementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelElementsLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jElementList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addComponent(jElementSymbol)
-                .addGap(18, 18, 18)
-                .addComponent(jElementName)
-                .addContainerGap())
+                .addGap(64, 64, 64))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jElementSymbol)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
+        jElementSymbol.getAccessibleContext().setAccessibleDescription("");
+
+        jPanelElements.add(jPanel1);
+        jPanel1.setBounds(60, 50, 190, 190);
+
         jTabbedPaneMain.addTab("Elements", jPanelElements);
+
+        jUseElementName.setText("Use Element Name");
 
         javax.swing.GroupLayout jPanelSettingsLayout = new javax.swing.GroupLayout(jPanelSettings);
         jPanelSettings.setLayout(jPanelSettingsLayout);
         jPanelSettingsLayout.setHorizontalGroup(
             jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jUseElementName)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanelSettingsLayout.setVerticalGroup(
             jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jUseElementName)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Settings", jPanelSettings);
@@ -157,11 +181,11 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelAbout.setLayout(jPanelAboutLayout);
         jPanelAboutLayout.setHorizontalGroup(
             jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
         jPanelAboutLayout.setVerticalGroup(
             jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGap(0, 292, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("About", jPanelAbout);
@@ -170,21 +194,110 @@ public class CuleCalc extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneMain)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneMain)
+            .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void loadProperties(){
+        try{
+            Properties prop = new Properties();
+            File file = new File(System.getProperty("java.class.path"));
+            File dir = file.getAbsoluteFile().getParentFile();
+            String path = dir.toString();
+            
+            File f = new File(path + "\\user.properties");
+            InputStream in = new FileInputStream( f );
+            
+            prop.load(in);
+            
+            bUseElementName = Boolean.parseBoolean(prop.getProperty("UseElementName"));            
+            in.close();
+        }catch (Exception e ) {
+            e.printStackTrace();
+        }
+    }
+    public void saveProperties(){
+        try {
+            //create a properties file
+            Properties props = new Properties();
+            props.setProperty("UseElementName", Boolean.toString(bUseElementName));
+            
+            File file = new File(System.getProperty("java.class.path"));
+            File dir = file.getAbsoluteFile().getParentFile();
+            String path = dir.toString();
+            
+            File f = new File(path + "\\user.properties");
+            OutputStream out = new FileOutputStream( f );
+            //If you wish to make some comments 
+            props.store(out, "User properties");
+        }catch (Exception e ) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void initSettings(){
+        System.out.println(bUseElementName);
+        jUseElementName.setSelected(bUseElementName);
+        jUseElementName.addItemListener(new ItemListener() {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                bUseElementName = true;
+                updateComboBox();
+            } else {
+                bUseElementName = false;
+                updateComboBox();
+            };
+        }
+        });
+    }
+    
+    private void initComboBox(){
+        jElementList.removeAllItems();
+        
+        elements.stream().forEach((e) -> {
+            jElementList.addItem(bUseElementName ? e.getName() : e.getSymbol());
+        });
+        
+        setElementCard(1);
+        
+        ItemListener itemListener;
+        itemListener = (ItemEvent itemEvent) -> {
+            setElementCard(jElementList.getSelectedIndex());
+        };
+        jElementList.addItemListener(itemListener);
+    }
+    
+    private void updateComboBox(){
+        jElementList.removeAllItems();
+        System.out.println("a");
+        elements.stream().forEach((e) -> {
+            jElementList.addItem(bUseElementName ? e.getName() : e.getSymbol());
+        });
+    }
+    
+    private void setElementCard(int i){
+        CElement e = elements.get(i);
+        if(jElementList.getSelectedIndex() != i){ jElementList.setSelectedIndex(i); }
+        jElementName.setText(e.getName());
+        jElementSymbol.setText(e.getSymbol());
+    }
+    
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
         CFormula t = new CFormula(jFormulaField.getText());
         System.out.println(t.getMass(true));
         for(int i = 0; i < t.getSize(); i++)
             System.out.println(t.getPart(i).getComposition(true));
+        t.getEmpirical();
     }//GEN-LAST:event_jCalculateActionPerformed
 
     private void jElementListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElementListActionPerformed
@@ -231,13 +344,15 @@ public class CuleCalc extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCalculate;
     private javax.swing.JComboBox jElementList;
-    private javax.swing.JLabel jElementName;
-    private javax.swing.JLabel jElementSymbol;
+    public javax.swing.JLabel jElementName;
+    public javax.swing.JLabel jElementSymbol;
     private javax.swing.JTextField jFormulaField;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSettings;
     private javax.swing.JTabbedPane jTabbedPaneMain;
+    private javax.swing.JCheckBox jUseElementName;
     // End of variables declaration//GEN-END:variables
 }

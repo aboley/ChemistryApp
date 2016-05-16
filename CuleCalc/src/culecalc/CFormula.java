@@ -16,6 +16,7 @@ public class CFormula {
         this.elements = getElements();
         this.mass = getMass();
         //Sets the % composition for each FormulaPart
+        
         for(CFormulaPart f : elements)
             f.setComposition(this.mass / this.coefficient);
         

@@ -75,6 +75,10 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelSettings = new javax.swing.JPanel();
         jUseElementName = new javax.swing.JCheckBox();
         jPanelAbout = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(320, 330));
@@ -190,15 +194,49 @@ public class CuleCalc extends javax.swing.JFrame {
         jTabbedPaneMain.addTab("Settings", jPanelSettings);
         jPanelSettings.getAccessibleContext().setAccessibleName("");
 
+        jLabel3.setText("TetraGen's");
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 0, 36)); // NOI18N
+        jLabel4.setText("CuleCalc");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 10)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setCaretPosition(0);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanelAboutLayout = new javax.swing.GroupLayout(jPanelAbout);
         jPanelAbout.setLayout(jPanelAboutLayout);
         jPanelAboutLayout.setHorizontalGroup(
             jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 315, Short.MAX_VALUE)
+            .addGroup(jPanelAboutLayout.createSequentialGroup()
+                .addGroup(jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAboutLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanelAboutLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanelAboutLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanelAboutLayout.setVerticalGroup(
             jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGroup(jPanelAboutLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("About", jPanelAbout);
@@ -367,13 +405,17 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JTextField jFormulaField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSettings;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPaneMain;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JCheckBox jUseElementName;
     // End of variables declaration//GEN-END:variables
 }

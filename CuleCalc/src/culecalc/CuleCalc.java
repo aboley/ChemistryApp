@@ -6,17 +6,14 @@
 package culecalc;
 
 import java.util.ArrayList;
-import java.awt.ItemSelectable;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLDecoder;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -26,6 +23,7 @@ import java.util.Properties;
 public class CuleCalc extends javax.swing.JFrame {
     
     private boolean bUseElementName;
+    private CFormula z;
     
     public static ArrayList<CElement> elements = new XMLReader("ElementInfo").getElements();
     /**
@@ -64,6 +62,11 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelMain = new javax.swing.JPanel();
         jFormulaField = new javax.swing.JTextField();
         jCalculate = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jEmpirical = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jElementComp = new javax.swing.JTextArea();
         jPanelElements = new javax.swing.JPanel();
         jElementList = new javax.swing.JComboBox();
         jElementName = new javax.swing.JLabel();
@@ -74,11 +77,24 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelAbout = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(320, 320));
-        setMinimumSize(new java.awt.Dimension(320, 320));
-        setPreferredSize(new java.awt.Dimension(320, 320));
+        setMaximumSize(new java.awt.Dimension(320, 330));
+        setMinimumSize(new java.awt.Dimension(320, 330));
+        setPreferredSize(new java.awt.Dimension(320, 330));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPaneMain.setPreferredSize(new java.awt.Dimension(320, 320));
+
+        jPanelMain.setMaximumSize(new java.awt.Dimension(319, 300));
+        jPanelMain.setMinimumSize(new java.awt.Dimension(319, 300));
+        jPanelMain.setPreferredSize(new java.awt.Dimension(319, 300));
+        jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jFormulaField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormulaFieldKeyPressed(evt);
+            }
+        });
+        jPanelMain.add(jFormulaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 11, 274, -1));
 
         jCalculate.setText("Calculate");
         jCalculate.addActionListener(new java.awt.event.ActionListener() {
@@ -86,30 +102,27 @@ public class CuleCalc extends javax.swing.JFrame {
                 jCalculateActionPerformed(evt);
             }
         });
+        jPanelMain.add(jCalculate, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 37, -1, -1));
 
-        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
-        jPanelMain.setLayout(jPanelMainLayout);
-        jPanelMainLayout.setHorizontalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jCalculate)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanelMainLayout.setVerticalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFormulaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCalculate)
-                .addContainerGap(232, Short.MAX_VALUE))
-        );
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Element Composition:");
+        jPanelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 105, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Empirical Formula:");
+        jPanelMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 71, -1, -1));
+        jPanelMain.add(jEmpirical, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 94, 235, -1));
+
+        jElementComp.setEditable(false);
+        jElementComp.setBackground(new java.awt.Color(240, 240, 240));
+        jElementComp.setColumns(20);
+        jElementComp.setLineWrap(true);
+        jElementComp.setRows(5);
+        jElementComp.setMaximumSize(new java.awt.Dimension(164, 94));
+        jElementComp.setMinimumSize(new java.awt.Dimension(164, 94));
+        jScrollPane1.setViewportView(jElementComp);
+
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 252, 120));
 
         jTabbedPaneMain.addTab("Main", jPanelMain);
 
@@ -190,19 +203,7 @@ public class CuleCalc extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("About", jPanelAbout);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jTabbedPaneMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -293,16 +294,31 @@ public class CuleCalc extends javax.swing.JFrame {
     }
     
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
-        CFormula t = new CFormula(jFormulaField.getText());
-        System.out.println(t.getMass(true));
-        for(int i = 0; i < t.getSize(); i++)
-            System.out.println(t.getPart(i).getComposition(true));
-        t.getEmpirical();
+        z = new CFormula(jFormulaField.getText());
+        System.out.println(z.getMass(true));
+        for(int i = 0; i < z.getSize(); i++)
+            System.out.println(z.getPart(i).getComposition(true));
+        z.getEmpirical();
+        
+        //Print to GUI
+        String gg = "";
+        for(int i = 0; i < z.getSize(); i++) {
+            gg += z.getPart(i).getComposition(true);
+            gg += "\n";
+        }
+        jElementComp.setText(gg);
+        jEmpirical.setText(z.getEmpirical());
+        
     }//GEN-LAST:event_jCalculateActionPerformed
 
     private void jElementListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElementListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jElementListActionPerformed
+
+    private void jFormulaFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormulaFieldKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            jCalculate.doClick();
+    }//GEN-LAST:event_jFormulaFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -343,15 +359,20 @@ public class CuleCalc extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCalculate;
+    private javax.swing.JTextArea jElementComp;
     private javax.swing.JComboBox jElementList;
     public javax.swing.JLabel jElementName;
     public javax.swing.JLabel jElementSymbol;
+    private javax.swing.JLabel jEmpirical;
     private javax.swing.JTextField jFormulaField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSettings;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JCheckBox jUseElementName;
     // End of variables declaration//GEN-END:variables

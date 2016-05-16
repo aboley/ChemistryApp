@@ -67,6 +67,8 @@ public class CuleCalc extends javax.swing.JFrame {
         jEmpirical = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jElementComp = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jMass = new javax.swing.JLabel();
         jPanelElements = new javax.swing.JPanel();
         jElementList = new javax.swing.JComboBox();
         jElementName = new javax.swing.JLabel();
@@ -79,18 +81,22 @@ public class CuleCalc extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(320, 330));
-        setMinimumSize(new java.awt.Dimension(320, 330));
-        setPreferredSize(new java.awt.Dimension(320, 330));
+        setMaximumSize(new java.awt.Dimension(320, 350));
+        setMinimumSize(new java.awt.Dimension(320, 350));
+        setPreferredSize(new java.awt.Dimension(320, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPaneMain.setPreferredSize(new java.awt.Dimension(320, 320));
+        jTabbedPaneMain.setMaximumSize(new java.awt.Dimension(350, 350));
+        jTabbedPaneMain.setMinimumSize(new java.awt.Dimension(320, 350));
+        jTabbedPaneMain.setPreferredSize(new java.awt.Dimension(320, 350));
 
-        jPanelMain.setMaximumSize(new java.awt.Dimension(319, 300));
-        jPanelMain.setMinimumSize(new java.awt.Dimension(319, 300));
-        jPanelMain.setPreferredSize(new java.awt.Dimension(319, 300));
+        jPanelMain.setInheritsPopupMenu(true);
+        jPanelMain.setMaximumSize(new java.awt.Dimension(319, 340));
+        jPanelMain.setMinimumSize(new java.awt.Dimension(319, 340));
+        jPanelMain.setPreferredSize(new java.awt.Dimension(319, 340));
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jFormulaField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -110,12 +116,12 @@ public class CuleCalc extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Element Composition:");
-        jPanelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 105, -1, -1));
+        jPanelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Empirical Formula:");
-        jPanelMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 71, -1, -1));
-        jPanelMain.add(jEmpirical, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 94, 235, -1));
+        jLabel2.setText("Molar Mass:");
+        jPanelMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPanelMain.add(jEmpirical, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 80, 20));
 
         jElementComp.setEditable(false);
         jElementComp.setBackground(new java.awt.Color(240, 240, 240));
@@ -126,7 +132,12 @@ public class CuleCalc extends javax.swing.JFrame {
         jElementComp.setMinimumSize(new java.awt.Dimension(164, 94));
         jScrollPane1.setViewportView(jElementComp);
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 252, 120));
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 252, 110));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Empirical Formula:");
+        jPanelMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 71, -1, -1));
+        jPanelMain.add(jMass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 90, 20));
 
         jTabbedPaneMain.addTab("Main", jPanelMain);
 
@@ -188,16 +199,20 @@ public class CuleCalc extends javax.swing.JFrame {
             .addGroup(jPanelSettingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jUseElementName)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Settings", jPanelSettings);
         jPanelSettings.getAccessibleContext().setAccessibleName("");
 
+        jPanelAbout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel3.setText("TetraGen's");
+        jPanelAbout.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 0, 36)); // NOI18N
         jLabel4.setText("CuleCalc");
+        jPanelAbout.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -210,38 +225,14 @@ public class CuleCalc extends javax.swing.JFrame {
         jTextArea1.setCaretPosition(0);
         jScrollPane2.setViewportView(jTextArea1);
 
-        javax.swing.GroupLayout jPanelAboutLayout = new javax.swing.GroupLayout(jPanelAbout);
-        jPanelAbout.setLayout(jPanelAboutLayout);
-        jPanelAboutLayout.setHorizontalGroup(
-            jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAboutLayout.createSequentialGroup()
-                .addGroup(jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAboutLayout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanelAboutLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanelAboutLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        jPanelAboutLayout.setVerticalGroup(
-            jPanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAboutLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
+        jPanelAbout.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 98, 281, 157));
+
+        jLabel5.setText("Austen B. / Alexis M. / Annelise W. / Zachary W.");
+        jPanelAbout.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jTabbedPaneMain.addTab("About", jPanelAbout);
 
-        getContentPane().add(jTabbedPaneMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jTabbedPaneMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -346,6 +337,7 @@ public class CuleCalc extends javax.swing.JFrame {
         }
         jElementComp.setText(gg);
         jEmpirical.setText(z.getEmpirical());
+        jMass.setText(z.getMass(true));
         
     }//GEN-LAST:event_jCalculateActionPerformed
 
@@ -407,6 +399,9 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jMass;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;

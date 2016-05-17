@@ -91,6 +91,8 @@ public class CuleCalc extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
+        jPanelExit = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(320, 350));
@@ -301,6 +303,33 @@ public class CuleCalc extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("About", jPanelAbout);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelExitLayout = new javax.swing.GroupLayout(jPanelExit);
+        jPanelExit.setLayout(jPanelExitLayout);
+        jPanelExitLayout.setHorizontalGroup(
+            jPanelExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelExitLayout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
+        );
+        jPanelExitLayout.setVerticalGroup(
+            jPanelExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelExitLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneMain.addTab("Exit", jPanelExit);
+
         getContentPane().add(jTabbedPaneMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 330));
 
         pack();
@@ -424,6 +453,10 @@ public class CuleCalc extends javax.swing.JFrame {
         jTabbedPaneMain.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -463,6 +496,7 @@ public class CuleCalc extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jCalculate;
     private javax.swing.JTextArea jElementComp;
     private javax.swing.JComboBox jElementList;
@@ -484,6 +518,7 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
     private javax.swing.JPanel jPanelElements;
+    private javax.swing.JPanel jPanelExit;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSettings;
     private javax.swing.JScrollPane jScrollPane1;

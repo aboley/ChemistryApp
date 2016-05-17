@@ -46,6 +46,9 @@ public class CuleCalc extends javax.swing.JFrame {
                 saveProperties();
             }
         });
+        
+        jTabbedPaneMain.setVisible(false);
+        
     }
     
     
@@ -58,6 +61,12 @@ public class CuleCalc extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelWelcome = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jTabbedPaneMain = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
         jFormulaField = new javax.swing.JTextField();
@@ -88,6 +97,66 @@ public class CuleCalc extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(320, 350));
         setPreferredSize(new java.awt.Dimension(320, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelWelcome.setPreferredSize(new java.awt.Dimension(320, 350));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel7.setText("Welcome");
+
+        jLabel8.setText("to");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel9.setText("CuleCalc");
+
+        jButton1.setText("Continue");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelWelcomeLayout = new javax.swing.GroupLayout(panelWelcome);
+        panelWelcome.setLayout(panelWelcomeLayout);
+        panelWelcomeLayout.setHorizontalGroup(
+            panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelWelcomeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7)
+                        .addGroup(panelWelcomeLayout.createSequentialGroup()
+                            .addGap(70, 70, 70)
+                            .addComponent(jLabel8))
+                        .addComponent(jLabel9)
+                        .addGroup(panelWelcomeLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton1)
+                                .addGroup(panelWelcomeLayout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jLabel10)))))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panelWelcomeLayout.setVerticalGroup(
+            panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelWelcomeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addGap(6, 6, 6)
+                    .addComponent(jLabel8)
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel9)
+                    .addGap(96, 96, 96)
+                    .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel10))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        getContentPane().add(panelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 300));
 
         jTabbedPaneMain.setMaximumSize(new java.awt.Dimension(350, 350));
         jTabbedPaneMain.setMinimumSize(new java.awt.Dimension(320, 350));
@@ -199,7 +268,7 @@ public class CuleCalc extends javax.swing.JFrame {
             .addGroup(jPanelSettingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jUseElementName)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Settings", jPanelSettings);
@@ -350,6 +419,11 @@ public class CuleCalc extends javax.swing.JFrame {
             jCalculate.doClick();
     }//GEN-LAST:event_jFormulaFieldKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        panelWelcome.setVisible(false);
+        jTabbedPaneMain.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -388,6 +462,7 @@ public class CuleCalc extends javax.swing.JFrame {
     public ArrayList<CElement> getElements(){ return this.elements; }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jCalculate;
     private javax.swing.JTextArea jElementComp;
     private javax.swing.JComboBox jElementList;
@@ -396,11 +471,15 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JLabel jEmpirical;
     private javax.swing.JTextField jFormulaField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jMass;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAbout;
@@ -412,5 +491,6 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JCheckBox jUseElementName;
+    private javax.swing.JPanel panelWelcome;
     // End of variables declaration//GEN-END:variables
 }

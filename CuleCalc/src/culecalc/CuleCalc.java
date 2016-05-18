@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -142,7 +143,7 @@ public class CuleCalc extends javax.swing.JFrame {
         );
         panelWelcomeLayout.setVerticalGroup(
             panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
             .addGroup(panelWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelWelcomeLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -158,7 +159,7 @@ public class CuleCalc extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(panelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 300));
+        getContentPane().add(panelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 350));
 
         jTabbedPaneMain.setMaximumSize(new java.awt.Dimension(350, 350));
         jTabbedPaneMain.setMinimumSize(new java.awt.Dimension(320, 350));
@@ -403,6 +404,19 @@ public class CuleCalc extends javax.swing.JFrame {
             setElementCard(jElementList.getSelectedIndex());
         };
         jElementList.addItemListener(itemListener);
+    }
+    
+    private void initTextField(){
+        KeyListener keylistener;
+        keylistener = (KeyEvent evt) -> {
+            char c = evt.getKeyChar();
+            if (Character.isLetter(c) || Character.isDigit(c)) {               
+            } else {
+                // Ignore this character
+                evt.consume();
+            }
+        };
+        
     }
     
     private void updateComboBox(){

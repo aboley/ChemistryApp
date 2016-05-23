@@ -81,9 +81,12 @@ public class CuleCalc extends javax.swing.JFrame {
         jMass = new javax.swing.JLabel();
         jPanelElements = new javax.swing.JPanel();
         jElementList = new javax.swing.JComboBox();
-        jElementName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jElementSymbol = new javax.swing.JLabel();
+        jElementMass = new javax.swing.JLabel();
+        jElementProtons = new javax.swing.JLabel();
+        jElementName = new javax.swing.JLabel();
+        jElementValence = new javax.swing.JLabel();
         jPanelSettings = new javax.swing.JPanel();
         jUseElementName = new javax.swing.JCheckBox();
         jPanelAbout = new javax.swing.JPanel();
@@ -98,7 +101,6 @@ public class CuleCalc extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(320, 350));
         setMinimumSize(new java.awt.Dimension(320, 350));
-        setPreferredSize(new java.awt.Dimension(320, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelWelcome.setPreferredSize(new java.awt.Dimension(320, 350));
@@ -223,32 +225,30 @@ public class CuleCalc extends javax.swing.JFrame {
         jPanelElements.add(jElementList);
         jElementList.setBounds(97, 20, 110, 20);
 
-        jElementName.setText("[Element Name]");
-        jPanelElements.add(jElementName);
-        jElementName.setBounds(120, 170, 76, 14);
+        jPanel1.setLayout(null);
 
         jElementSymbol.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jElementSymbol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jElementSymbol.setText("[S]");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jElementSymbol)
-                .addGap(64, 64, 64))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jElementSymbol)
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-
+        jPanel1.add(jElementSymbol);
+        jElementSymbol.setBounds(60, 70, 80, 58);
         jElementSymbol.getAccessibleContext().setAccessibleDescription("");
+
+        jElementMass.setText("[Mass]");
+        jPanel1.add(jElementMass);
+        jElementMass.setBounds(50, 70, 32, 14);
+
+        jElementProtons.setText("[Protons]");
+        jPanel1.add(jElementProtons);
+        jElementProtons.setBounds(50, 120, 45, 14);
+
+        jElementName.setText("[Element Name]");
+        jPanel1.add(jElementName);
+        jElementName.setBounds(60, 140, 76, 14);
+
+        jElementValence.setText("[Valence]");
+        jPanel1.add(jElementValence);
+        jElementValence.setBounds(90, 60, 45, 14);
 
         jPanelElements.add(jPanel1);
         jPanel1.setBounds(60, 50, 190, 190);
@@ -401,22 +401,11 @@ public class CuleCalc extends javax.swing.JFrame {
         
         ItemListener itemListener;
         itemListener = (ItemEvent itemEvent) -> {
-            setElementCard(jElementList.getSelectedIndex());
-        };
-        jElementList.addItemListener(itemListener);
-    }
-    
-    private void initTextField(){
-        KeyListener keylistener;
-        keylistener = (KeyEvent evt) -> {
-            char c = evt.getKeyChar();
-            if (Character.isLetter(c) || Character.isDigit(c)) {               
-            } else {
-                // Ignore this character
-                evt.consume();
+            if(jElementList.getSelectedIndex() > 0){
+                setElementCard(jElementList.getSelectedIndex());
             }
         };
-        
+        jElementList.addItemListener(itemListener);
     }
     
     private void updateComboBox(){
@@ -432,6 +421,9 @@ public class CuleCalc extends javax.swing.JFrame {
         if(jElementList.getSelectedIndex() != i){ jElementList.setSelectedIndex(i); }
         jElementName.setText(e.getName());
         jElementSymbol.setText(e.getSymbol());
+        jElementMass.setText(Double.toString(e.getMass()));
+        jElementProtons.setText(Integer.toString(e.getProtons()));
+        jElementValence.setText(Integer.toString(e.getValence()));
     }
     
     private void jCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCalculateActionPerformed
@@ -514,8 +506,11 @@ public class CuleCalc extends javax.swing.JFrame {
     private javax.swing.JButton jCalculate;
     private javax.swing.JTextArea jElementComp;
     private javax.swing.JComboBox jElementList;
+    private javax.swing.JLabel jElementMass;
     public javax.swing.JLabel jElementName;
-    public javax.swing.JLabel jElementSymbol;
+    private javax.swing.JLabel jElementProtons;
+    private javax.swing.JLabel jElementSymbol;
+    private javax.swing.JLabel jElementValence;
     private javax.swing.JLabel jEmpirical;
     private javax.swing.JTextField jFormulaField;
     private javax.swing.JLabel jLabel1;
